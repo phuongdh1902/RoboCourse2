@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.1 (Python 3.7.5 on win32)" generated="20210819 15:46:57.932" rpa="true" schemaversion="2">
+<suite id="s1" name="Tasks" source="d:\TMA\robot\cer2\tasks.robot">
+<test id="s1-t1" name="Order robots from RobotSpareBin Industries Inc">
+<kw name="Open the robot order website">
+<kw name="Get Secret" library="RPA.Robocloud.Secrets">
+<var>${url}</var>
+<arg>cre</arg>
+<doc>Read a secret from the configured source, e.g. Robocloud Vault,
+and return it as a ``Secret`` object.</doc>
+<msg timestamp="20210819 15:46:59.811" level="INFO">Protecting keyword: RPA.Robocloud.Secrets.Get Secret</msg>
+<msg timestamp="20210819 15:46:59.865" level="INFO">Log level changed from NONE to INFO.</msg>
+<status status="PASS" starttime="20210819 15:46:59.811" endtime="20210819 15:46:59.865"/>
+</kw>
+<kw name="Open Available Browser" library="RPA.Browser.Selenium">
+<arg>${url}[url]</arg>
+<doc>Attempts to open a browser on the user's device from a set of
+supported browsers. Automatically downloads a corresponding webdriver
+if none is already installed.</doc>
+<msg timestamp="20210819 15:46:59.866" level="INFO">Creating an instance of the Chrome WebDriver.</msg>
+<msg timestamp="20210819 15:46:59.974" level="INFO">Created download root directory: C:\Users\nguye\AppData\Local\robocorp\webdrivers</msg>
+<msg timestamp="20210819 15:46:59.974" level="INFO">Created symlink directory: C:\Users\nguye\AppData\Local\robocorp\webdrivers</msg>
+<msg timestamp="20210819 15:46:59.975" level="INFO">Creating an instance of the Chrome WebDriver.</msg>
+<msg timestamp="20210819 15:47:02.855" level="INFO">Created Chrome browser with arguments: --disable-dev-shm-usage --disable-web-security --allow-running-insecure-content --no-sandbox</msg>
+<msg timestamp="20210819 15:47:02.855" level="INFO" html="true">&lt;p&gt;Attempted combinations:&lt;/p&gt;&lt;div class="doc"&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Browser&lt;/th&gt;&lt;th&gt;Download&lt;/th&gt;&lt;th&gt;Error&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Chrome&lt;/td&gt;&lt;td&gt;False&lt;/td&gt;&lt;td&gt;Message: 'chromedriver' executable needs to be in PATH. Please see https://sites.google.com/a/chromium.org/chromedriver/home
+&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Chrome&lt;/td&gt;&lt;td&gt;True&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</msg>
+<msg timestamp="20210819 15:47:02.855" level="INFO">Opening url 'https://robotsparebinindustries.com/#/robot-order'</msg>
+<status status="PASS" starttime="20210819 15:46:59.866" endtime="20210819 15:47:04.660"/>
+</kw>
+<status status="PASS" starttime="20210819 15:46:59.810" endtime="20210819 15:47:04.661"/>
+</kw>
+<kw name="Ask for user input">
+<var>${csv_link}</var>
+<kw name="Add text input" library="RPA.Dialogs">
+<arg>csv_link</arg>
+<arg>CSV file link</arg>
+<tag>input</tag>
+<doc>Add a text input element</doc>
+<status status="PASS" starttime="20210819 15:47:04.662" endtime="20210819 15:47:04.663"/>
+</kw>
+<kw name="Run dialog" library="RPA.Dialogs">
+<var>${csv_link}</var>
+<tag>dialog</tag>
+<doc>Create a dialog from all the defined elements and block
+until the user has handled it.</doc>
+<msg timestamp="20210819 15:47:04.663" level="INFO">Protecting keyword: RPA.Dialogs.Run dialog</msg>
+<msg timestamp="20210819 15:47:22.697" level="INFO">Log level changed from NONE to INFO.</msg>
+<status status="PASS" starttime="20210819 15:47:04.663" endtime="20210819 15:47:22.697"/>
+</kw>
+<msg timestamp="20210819 15:47:22.697" level="INFO">${csv_link} = https://robotsparebinindustries.com/orders.csv</msg>
+<status status="PASS" starttime="20210819 15:47:04.662" endtime="20210819 15:47:22.697"/>
+</kw>
+<kw name="Download CSV file">
+<arg>${csv_link}</arg>
+<kw name="Download" library="RPA.HTTP">
+<arg>${csv_link}</arg>
+<arg>overwrite=True</arg>
+<doc>An alias for the ``HTTP Get`` keyword.</doc>
+<msg timestamp="20210819 15:47:22.697" level="INFO">Creating a new HTTP session</msg>
+<msg timestamp="20210819 15:47:22.697" level="INFO">Creating Session using : alias=rpasession_alias.httpsrobotsparebinindustries.com, url=https://robotsparebinindustries.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<msg timestamp="20210819 15:47:23.741" level="INFO">GET Request : url=https://robotsparebinindustries.com/orders.csv 
+ path_url=/orders.csv 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20210819 15:47:23.741" level="INFO">GET Response : url=https://robotsparebinindustries.com/orders.csv 
+ status=200, reason=OK 
+ headers={'Connection': 'keep-alive', 'Content-Length': '199', 'Server': 'GitHub.com', 'Content-Type': 'text/csv; charset=utf-8', 'Strict-Transport-Security': 'max-age=31556952', 'Last-Modified': 'Fri, 13 Aug 2021 11:27:04 GMT', 'Access-Control-Allow-Origin': '*', 'ETag': 'W/"61165708-19c"', 'expires': 'Thu, 19 Aug 2021 08:57:24 GMT', 'Cache-Control': 'max-age=600', 'Content-Encoding': 'gzip', 'x-proxy-cache': 'MISS', 'X-GitHub-Request-Id': '5300:2BB2:5CE1D:A7E07:611E1A9C', 'Accept-Ranges': 'bytes', 'Date': 'Thu, 19 Aug 2021 08:47:24 GMT', 'Via': '1.1 varnish', 'Age': '0', 'X-Served-By': 'cache-hkg17926-HKG', 'X-Cache': 'MISS', 'X-Cache-Hits': '0', 'X-Timer': 'S1629362844.433934,VS0,VE265', 'Vary': 'Accept-Encoding', 'X-Fastly-Request-ID': '736e48c440c58907931c72699efa643a07e73daf'} 
+ body=Order number,Head,Body,Legs,Address
+1,1,2,3,Address 123
+2,4,1,5,Address 456
+3,6,2,3,Address 789
+4,2,3,2,Address 1
+5,3,5,1,Address 2
+6,1,6,6,Address 3
+7,5,1,5,Address 4
+8,2,3,3,Address 5
+9,3,2,2,Address 6
+10,4,4,2,Address 7
+11,6,6,1,Address 8
+12,1,3,3,Address 9
+13,1,5,4,Address A
+14,3,1,5,Address B
+15,3,2,6,Address C
+16,6,3,6,Address D
+17,5,4,1,Address E
+18,2,5,1,Address F
+19,4,6,2,Address G
+20,1,1,5,Address H 
+ </msg>
+<status status="PASS" starttime="20210819 15:47:22.697" endtime="20210819 15:47:23.742"/>
+</kw>
+<status status="PASS" starttime="20210819 15:47:22.697" endtime="20210819 15:47:23.743"/>
+</kw>
+<kw name="Get order">
+<var>@{orders}</var>
+<kw name="Read table from CSV" library="RPA.Tables">
+<var>@{orders}</var>
+<arg>orders.csv</arg>
+<arg>header=True</arg>
+<doc>Read a CSV file as a table.</doc>
+<msg timestamp="20210819 15:47:23.757" level="INFO">@{orders} = [ {'Order number': '1', 'Head': '1', 'Body': '2', 'Legs': '3', 'Address': 'Address 123'} | {'Order number': '2', 'Head': '4', 'Body': '1', 'Legs': '5', 'Address': 'Address 456'} | {'Order number': '3'...</msg>
+<status status="PASS" starttime="20210819 15:47:23.745" endtime="20210819 15:47:23.757"/>
+</kw>
+<msg timestamp="20210819 15:47:23.757" level="INFO">@{orders} = [ {'Order number': '1', 'Head': '1', 'Body': '2', 'Legs': '3', 'Address': 'Address 123'} | {'Order number': '2', 'Head': '4', 'Body': '1', 'Legs': '5', 'Address': 'Address 456'} | {'Order number': '3'...</msg>
+<status status="PASS" starttime="20210819 15:47:23.744" endtime="20210819 15:47:23.757"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>@{orders}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210819 15:47:23.758" level="FAIL">Keyword 'BuiltIn.Log' expected 1 to 6 arguments, got 20.</msg>
+<status status="FAIL" starttime="20210819 15:47:23.758" endtime="20210819 15:47:23.758"/>
+</kw>
+<status status="FAIL" starttime="20210819 15:46:59.808" endtime="20210819 15:47:23.758">Keyword 'BuiltIn.Log' expected 1 to 6 arguments, got 20.</status>
+</test>
+<doc>Orders robots from RobotSpareBin Industries Inc.
+Saves the order HTML receipt as a PDF file.
+Saves the screenshot of the ordered robot.
+Embeds the screenshot of the robot to the PDF receipt.
+Creates ZIP achieve of the receipts and the images.</doc>
+<status status="FAIL" starttime="20210819 15:46:57.932" endtime="20210819 15:47:23.760"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tasks</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="1" skip="0" id="s1" name="Tasks">Tasks</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
